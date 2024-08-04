@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.ListIterator;
 
 public class WishList {
 
@@ -9,6 +10,11 @@ public class WishList {
      * @return the wishList with the newly added item
      */
     public List<WishListItem> addLast(List<WishListItem> wishList, WishListItem item) {
+        ListIterator<WishListItem> i = wishList.listIterator();
+        while(i.hasNext()) {
+            i.next();
+        }
+        i.add(item);
         return wishList;
     }
 
@@ -20,6 +26,20 @@ public class WishList {
      * @return the wishList with the newly added item
      */
     public List<WishListItem> addAtIndex(List<WishListItem> wishList, WishListItem item, int index) {
+        ListIterator<WishListItem> i = wishList.listIterator();
+        int j = 0;
+        boolean added = false;
+        while(i.hasNext()) {
+            if (j == index) {
+                i.add(item);
+                added = true;
+            }
+            i.next();
+            j++;
+        }
+        if (!added) {
+            i.add(item);
+        }
         return wishList;
     }
 
@@ -29,6 +49,11 @@ public class WishList {
      * @return the empty wishList
      */
     public List<WishListItem> removeAll(List<WishListItem> wishList) {
+        ListIterator<WishListItem> i = wishList.listIterator();
+        while(i.hasNext()) {
+            i.next();
+            i.remove();
+        }
         return wishList;
     }
 
@@ -39,6 +64,12 @@ public class WishList {
      * @return the wishList with the removed item
      */
     public List<WishListItem> removeItem(List<WishListItem> wishList, WishListItem item) {
+        ListIterator<WishListItem> i = wishList.listIterator();
+        while(i.hasNext()) {
+            if(i.next().equals(item)) {
+                i.remove();
+            }
+        }
         return wishList;
     }
 }
